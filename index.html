@@ -510,7 +510,8 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
       </div>
       <div class="card-body">
         <div class="prod-row">
-          <div class="prod-name">Box 4 Sabores</div>
+          <div class="prod-name" style="margin-bottom: 2px;">Box 4 Sabores</div>
+          <div style="font-size: 10px; color: var(--muted); margin-bottom: 6px; font-family: 'DM Mono', monospace;">4 un. | R$ 16,95 / lata</div>
           <div class="input-group">
             <input type="number" class="qty-input" id="mista_qty" min="0" placeholder="QTD" oninput="recalc()">
             <div class="price-tag"><span>Unit.</span><strong>R$ 67,80</strong></div>
@@ -576,18 +577,18 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
 
 <script>
 const PRODUCTS_12 = [
-  {id:'ab12',label:'Açaí Berry',    price:198},
-  {id:'cp12',label:'Caipirinha',    price:198},
-  {id:'es12',label:'Espumante',     price:198},
-  {id:'ki12',label:'Ki-Suco® Uva',  price:198},
-  {id:'rc12',label:'Refresh Citrus',price:198}
+  {id:'ab12',label:'Açaí Berry',    price:198, unitPrice:'12 un. | R$ 16,50 / lata'},
+  {id:'cp12',label:'Caipirinha',    price:198, unitPrice:'12 un. | R$ 16,50 / lata'},
+  {id:'es12',label:'Espumante',     price:198, unitPrice:'12 un. | R$ 16,50 / lata'},
+  {id:'ki12',label:'Ki-Suco® Uva',  price:198, unitPrice:'12 un. | R$ 16,50 / lata'},
+  {id:'rc12',label:'Refresh Citrus',price:198, unitPrice:'12 un. | R$ 16,50 / lata'}
 ];
 const PRODUCTS_PALLET = [
-  {id:'abp',label:'Açaí Berry',    price:21924},
-  {id:'cpp',label:'Caipirinha',    price:21924},
-  {id:'esp',label:'Espumante',     price:21924},
-  {id:'kip',label:'Ki-Suco® Uva',  price:21924},
-  {id:'rcp',label:'Refresh Citrus',price:21924}
+  {id:'abp',label:'Açaí Berry',    price:21924, unitPrice:'1.512 un. | R$ 14,49 / lata'},
+  {id:'cpp',label:'Caipirinha',    price:21924, unitPrice:'1.512 un. | R$ 14,49 / lata'},
+  {id:'esp',label:'Espumante',     price:21924, unitPrice:'1.512 un. | R$ 14,49 / lata'},
+  {id:'kip',label:'Ki-Suco® Uva',  price:21924, unitPrice:'1.512 un. | R$ 14,49 / lata'},
+  {id:'rcp',label:'Refresh Citrus',price:21924, unitPrice:'1.512 un. | R$ 14,49 / lata'}
 ];
 
 const fmt = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
@@ -596,7 +597,8 @@ const getQty = id => { const e=document.getElementById(id); return e?(parseFloat
 function buildProducts(containerId, prods) {
   document.getElementById(containerId).innerHTML = prods.map(p=>`
     <div class="prod-row">
-      <div class="prod-name">${p.label}</div>
+      <div class="prod-name" style="margin-bottom: 2px;">${p.label}</div>
+      <div style="font-size: 10px; color: var(--muted); margin-bottom: 6px; font-family: 'DM Mono', monospace;">${p.unitPrice}</div>
       <div class="input-group">
         <input type="number" class="qty-input" id="${p.id}_qty" min="0" placeholder="QTD" oninput="recalc()">
         <div class="price-tag"><span>Unit.</span><strong>${fmt(p.price)}</strong></div>
