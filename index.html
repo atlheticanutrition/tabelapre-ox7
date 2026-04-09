@@ -33,7 +33,6 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  /* Fonte principal alterada aqui */
   font-family: 'Chakra Petch', sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -64,6 +63,11 @@ body::before {
   flex-wrap: wrap;
   margin-bottom: 28px;
 }
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 .brand {
   font-size: 10px;
   font-weight: 600;
@@ -88,7 +92,6 @@ body::before {
   padding: 9px 18px;
   border-radius: var(--radius-sm);
   font-size: 13px; font-weight: 600;
-  /* Fonte dos botões alterada aqui */
   font-family: 'Chakra Petch', sans-serif;
   cursor: pointer;
   transition: all .15s ease;
@@ -265,15 +268,22 @@ body::before {
   color: var(--muted2); padding: 2px 9px;
   border-radius: 20px; font-family: 'DM Mono', monospace;
 }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+/* Wrapper responsivo para a tabela */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
 thead th {
   padding: 10px 20px; text-align: left;
   font-size: 10px; font-weight: 700;
   letter-spacing: 1px; text-transform: uppercase;
   color: var(--muted); background: var(--surface2);
   border-bottom: 1px solid var(--border);
+  white-space: nowrap;
 }
-tbody td { padding: 12px 20px; border-bottom: 1px solid var(--border); }
+tbody td { padding: 12px 20px; border-bottom: 1px solid var(--border); white-space: nowrap; }
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:hover td { background: rgba(255,255,255,.02); }
 
@@ -293,7 +303,7 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
   padding: 3px 9px; border-radius: 20px;
 }
 .no-disc { color: var(--muted); font-size: 13px; }
-.empty-msg { text-align: center; padding: 32px; color: var(--muted); font-size: 13px; }
+.empty-msg { text-align: center; padding: 32px; color: var(--muted); font-size: 13px; white-space: normal; }
 
 /* ── Print Header ── */
 .print-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1.5px solid var(--border); }
@@ -301,6 +311,60 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
 .print-header-text p { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
 .print-header-text h2 { font-size: 16px; font-weight: 700; color: var(--text); }
 
+/* Efeito sutil ao passar o mouse na logo */
+.logo-link { transition: opacity 0.2s; }
+.logo-link:hover { opacity: 0.8; }
+
+/* ── Responsividade ── */
+@media (max-width: 850px) {
+  .prod-grid, .summary-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
+@media (max-width: 600px) {
+  body { padding: 20px 12px 32px; }
+  
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .header-brand {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  
+  .btn {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .config-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .field-wrap {
+    width: 100%;
+  }
+  
+  .discount-input {
+    width: 100%;
+    max-width: none;
+    flex: 1;
+  }
+  
+  .title { font-size: 22px; }
+  .sum-value { font-size: 24px; }
+}
+
+/* ── Impressão / PDF ── */
 @media print {
   body { background: #fff !important; color: #000 !important; padding: 8px; }
   body::before { display: none; }
@@ -323,8 +387,8 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
     --red-dim: rgba(185,28,28,.08);
   }
 
-  .summary-grid { grid-template-columns: repeat(3,1fr) !important; margin-bottom: 16px; }
-  .sum-card { border: 1px solid #ddd !important; }
+  .summary-grid { grid-template-columns: repeat(3,1fr) !important; margin-bottom: 16px; gap: 10px; }
+  .sum-card { border: 1px solid #ddd !important; padding: 14px;}
   .sum-card::before { display: none; }
   .sum-premio { background: #c62828 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .sum-premio .sum-label,
@@ -334,6 +398,8 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
   .sum-prazo .sum-value  { color: #c2410c !important; }
   .card-dot { box-shadow: none !important; }
   .table-card { border: 1px solid #ddd; }
+  .table-responsive { overflow: visible !important; }
+  table { min-width: 100%; }
   thead { background: #37474f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   thead th { color: #fff !important; }
   .total-cell { color: #1a56db !important; }
@@ -343,22 +409,13 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
   .pill-orange { background: rgba(194,65,12,.12)  !important; color: #c2410c !important; }
   .disc-pill { background: rgba(21,128,61,.12) !important; color: #15803d !important; }
 }
-
-@media (max-width: 700px) {
-  .prod-grid, .summary-grid { grid-template-columns: 1fr; }
-  .title { font-size: 20px; }
-}
-
-/* Efeito sutil ao passar o mouse na logo */
-.logo-link { transition: opacity 0.2s; }
-.logo-link:hover { opacity: 0.8; }
 </style>
 </head>
 <body>
 <div class="wrap" id="app-wrap">
 
   <div class="header">
-    <div style="display:flex;align-items:center;gap:20px">
+    <div class="header-brand">
       <a href="https://www.atlheticanutrition.com.br/" target="_blank" rel="noopener noreferrer" class="logo-link">
         <img src="https://cdn-retailhub.com/athletica-nutrition/595663b1-ef03-4b23-be2d-0a59cb2b3604.png" alt="X7 Logo" style="height:60px;width:auto;flex-shrink:0">
       </a>
@@ -453,17 +510,21 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
       <span class="table-title">Resumo de Itens</span>
       <span class="table-count" id="item-count">0 itens</span>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Categoria</th><th>Produto</th>
-          <th>Preço Unit.</th><th>Desconto</th><th>QTD</th><th>Total</th>
-        </tr>
-      </thead>
-      <tbody id="resumo-body">
-        <tr><td colspan="6" class="empty-msg">Nenhum item adicionado ainda</td></tr>
-      </tbody>
-    </table>
+    
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th><th>Produto</th>
+            <th>Preço Unit.</th><th>Desconto</th><th>QTD</th><th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="resumo-body">
+          <tr><td colspan="6" class="empty-msg">Nenhum item adicionado ainda</td></tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 
 </div>
