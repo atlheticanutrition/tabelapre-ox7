@@ -311,9 +311,37 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
 .print-header-text p { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
 .print-header-text h2 { font-size: 16px; font-weight: 700; color: var(--text); }
 
-/* Efeito sutil ao passar o mouse na logo */
 .logo-link { transition: opacity 0.2s; }
 .logo-link:hover { opacity: 0.8; }
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.footer-logo {
+  height: 32px;
+  width: auto;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  filter: grayscale(100%);
+}
+.footer-logo:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+.footer p {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
 
 /* ── Responsividade ── */
 @media (max-width: 850px) {
@@ -408,6 +436,19 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
   .pill-purple { background: rgba(124,58,237,.12) !important; color: #7c3aed !important; }
   .pill-orange { background: rgba(194,65,12,.12)  !important; color: #c2410c !important; }
   .disc-pill { background: rgba(21,128,61,.12) !important; color: #15803d !important; }
+  
+  .footer {
+    border-top: 1px solid #ddd;
+    margin-top: 30px;
+    padding-top: 15px;
+  }
+  .footer-logo {
+    opacity: 0.8;
+    filter: none;
+  }
+  .footer p {
+    color: #888 !important;
+  }
 }
 </style>
 </head>
@@ -524,7 +565,11 @@ tbody tr:hover td { background: rgba(255,255,255,.02); }
         </tbody>
       </table>
     </div>
+  </div>
 
+  <div class="footer">
+    <img src="https://cdn-retailhub.com/athletica-nutrition/8cd5d785-8ebf-43ef-8b23-cc43cb1ae0da.png" alt="Logo" class="footer-logo">
+    <p>Todos os Direitos Reservados a Atlhetica Nutrition © 2026</p>
   </div>
 
 </div>
